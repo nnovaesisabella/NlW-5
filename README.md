@@ -13,7 +13,7 @@ A aplicação consiste em selecionar os podcasts para serem ouvidos e sempre man
 
 🔖 Layout
 
-
+![Interna](https://user-images.githubusercontent.com/45005522/115753344-7d139780-a371-11eb-8f8e-8ccdfb1c8b9b.png)
 
 
 💻 Desenvolvimento
