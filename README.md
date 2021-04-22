@@ -1,9 +1,9 @@
 # Evento NlW-5 
 Desenvolvimento Web Front End 
 
- <img src='/logo.svg'/>
+ ![alt text]<img src='/logo.svg'/>
 
- 
+
 🚀 Sobre o projeto 
 
 Podcastr é uma aplicação Front End web construída no evento NLW 5, organizado pela Rocketseat.
