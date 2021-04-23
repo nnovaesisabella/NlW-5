@@ -40,7 +40,9 @@ git clone https://github.com/nnovaesisabella/NlW-5.git
 
 
 cd NL-5 
+
 code . 
+
 yarn dev 
 
 
