@@ -2,10 +2,9 @@
 Desenvolvimento Web Front End 
 
 
- <img src='/logo.svg'/>
-
-
 ![Logo](https://user-images.githubusercontent.com/45005522/115754476-99fc9a80-a372-11eb-87bf-9400f367ec4b.png)
+
+
 __________________________________________________________________________________________________________________
 
 
