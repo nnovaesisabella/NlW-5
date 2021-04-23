@@ -24,7 +24,8 @@
       position: relative;
       display: flex;
       align-items: center;
-
+      box-shadow: 0 8px 6px -6px var(--gray-200);
+      
       img {
         width: 6rem;
         height: 6rem;

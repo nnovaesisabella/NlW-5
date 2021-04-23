@@ -1,46 +1,114 @@
-import styles from './styles.module.scss'
+import Image from "next/image";
+import { useContext, useRef , useEffect} from "react";
+import { PlayerContext } from "../../contexts/PlayerContext";
+import Slider from "rc-slider"; //progress ádio
 
-export function  Player ()  {
-    return (
-        <div className={styles.playerContainer}>
-            <header>
-                <img src="/playing.svg" alt="Tocando agora" />
-            <strong> Tocando agora</strong>    
-            </header>
+//styles
+import styles from "./styles.module.scss";
+import "rc-slider/assets/index.css";
 
-            <div className={styles.emptyPlayer}>
-            <strong> Selecione um podcast para ouvir</strong>
-            </div>
-            <footer className={styles.empty}>
-                <div className={styles.progress}>
-                    <span> 00:00 </span>
-                    <div className={styles.slider}>
-                    <div className={styles.emptySlider} />
-                    </div>
-                    
-                    <span> 00:00</span>
-                </div>
 
-                <div className={styles.buttons}>
-                    <button type="button">
-                    <img src='./shuffle.svg' alt="Ordem aleatória"/>
-                    </button>
-                     <button type="button">
-                    <img src='./play-previous.svg' alt="Voltar"/>
-                    </button>
-                    <button type="button" className={styles.playButton}>
-                    <img src='./play.svg' alt="Voltar"/>
-                    </button>
-                    <button type="button">
-                    <img src='./play-next.svg' alt="Próxima"/>
-                    </button>
-                    <button type="button">
-                    <img src='./repeat.svg' alt="Repetir"/>
-                    </button>
-                </div>
-            </footer>
+
+
+export function Player() {
+
+    const audioRef = useRef<HTMLAudioElement>(null);
+    const { episodeList, currentEpisodeIndex, isPlaying, togglePlay } = useContext(PlayerContext);
+    
+
+    useEffect(() => {
+        
+        if (!audioRef.current) {
+            return;
+        }
+        if (isPlaying) {
+            audioRef.current.play();
+        } else {
+            audioRef.current.pause();
+        }
+    }, [isPlaying])
+        ;
+  const episode = episodeList[currentEpisodeIndex];
+  return (
+    <div className={styles.playerContainer}>
+      <header>
+        <img src="/playing.svg" alt="Tocando agora" />
+        <strong> Tocando agora </strong>
+      </header>
+
+      {episode ? (
+        <div className={styles.currentEpisode}>
+          <Image
+            width={800}
+            height={592}
+            src={episode.thumbnail}
+            objectFit="fill"
+          />
+          <strong> {episode.title}</strong>
+          <span> {episode.members}</span>
         </div>
-    )
+      ) : (
+        <div className={styles.emptyPlayer}>
+          <strong> Selecione um podcast para ouvir</strong>
+        </div>
+      )}
+
+      <footer className={!episode ? styles.empty : ""}>
+        <div className={styles.progress}>
+          <span> 00:00 </span>
+          <div className={styles.slider}>
+            {episode ? (
+              <Slider
+                trackStyle={{ backgroundColor: "#04d361" }}
+                railStyle={{ backgroundColor: "#9f75ff" }}
+                handleStyle={{ backgroundColor: "#04d361" }}
+              />
+            ) : (
+              <div className={styles.emptySlider} />
+            )}
+          </div>
+
+          <span> 00:00</span>
+        </div>
+
+              {episode &&
+                  <audio
+                  src={episode.url}
+                  autoPlay
+                  ref={audioRef}
+                  
+                  
+                  />}
+
+        <div className={styles.buttons}>
+          <button type="button" disabled={!episode}>
+            <img src="./shuffle.svg" alt="Ordem aleatória" />
+          </button>
+
+          <button type="button" disabled={!episode}>
+            <img src="./play-previous.svg" alt="Voltar" />
+                  </button>
+                
+          <button
+            type="button"
+            className={styles.playButton}
+                      disabled={!episode}
+                      onClick={togglePlay}
+            >
+            {isPlaying ?
+             <img src="./pause.svg" alt="Pause" /> :
+             <img src="play.svg" alt="Tocar"/> 
+                  }
+           
+          </button>
+          <button type="button" disabled={!episode}>
+            <img src="./play-next.svg" alt="Próxima" />
+          </button>
+          <button type="button" disabled={!episode}>
+            <img src="./repeat.svg" alt="Repetir" />
+          </button>
+        </div>
+      </footer>
+    </div>
+  );
 }
-
-
