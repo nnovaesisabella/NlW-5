@@ -1,13 +1,13 @@
 # Evento NlW-5 
 Desenvolvimento Web Front End 
 
-<<<<<<< HEAD
+
  ![alt text]<img src='/logo.svg'/>
 
-=======
+
 ![Logo](https://user-images.githubusercontent.com/45005522/115754476-99fc9a80-a372-11eb-87bf-9400f367ec4b.png)
 __________________________________________________________________________________________________________________
->>>>>>> da619e8c28d0e9afb9ac26af4346f03ddacd0ed6
+
 
 🚀 Sobre o projeto 
 
