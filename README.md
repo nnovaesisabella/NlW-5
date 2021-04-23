@@ -37,6 +37,8 @@ Next .js
 git clone https://github.com/nnovaesisabella/NlW-5.git
 
 #executar projeto 
+
+
 cd NL-5 
 code . 
 yarn dev 
