@@ -31,6 +31,10 @@ Typescript
 Sass
 Next .js
 
+🎨 Styles:
+
+SCSS
+
 🛠️ Execução do projeto 
 
 #clonar repositório Git Bash 
