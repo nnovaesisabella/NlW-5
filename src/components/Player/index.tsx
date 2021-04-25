@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useContext, useRef , useEffect} from "react";
+import { useContext, useRef, useEffect } from "react";
 import { PlayerContext } from "../../contexts/PlayerContext";
 import Slider from "rc-slider"; //progress ádio
 
@@ -7,27 +7,28 @@ import Slider from "rc-slider"; //progress ádio
 import styles from "./styles.module.scss";
 import "rc-slider/assets/index.css";
 
-
-
-
 export function Player() {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const {
+    episodeList,
+    currentEpisodeIndex,
+    isPlaying,
+    togglePlay,
+    setPlayningState,
+    playNext,
+    playPrevious,
+  } = useContext(PlayerContext);
 
-    const audioRef = useRef<HTMLAudioElement>(null);
-    const { episodeList, currentEpisodeIndex, isPlaying, togglePlay } = useContext(PlayerContext);
-    
-
-    useEffect(() => {
-        
-        if (!audioRef.current) {
-            return;
-        }
-        if (isPlaying) {
-            audioRef.current.play();
-        } else {
-            audioRef.current.pause();
-        }
-    }, [isPlaying])
-        ;
+  useEffect(() => {
+    if (!audioRef.current) {
+      return;
+    }
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
   const episode = episodeList[currentEpisodeIndex];
   return (
     <div className={styles.playerContainer}>
@@ -71,14 +72,15 @@ export function Player() {
           <span> 00:00</span>
         </div>
 
-              {episode &&
-                  <audio
-                  src={episode.url}
-                  autoPlay
-                  ref={audioRef}
-                  
-                  
-                  />}
+        {episode && (
+          <audio
+            src={episode.url}
+            ref={audioRef}
+            autoPlay
+            onPlay={() => setPlayningState(true)}
+            onPause={() => setPlayningState(false)}
+          />
+        )}
 
         <div className={styles.buttons}>
           <button type="button" disabled={!episode}>
@@ -86,22 +88,22 @@ export function Player() {
           </button>
 
           <button type="button" disabled={!episode}>
-            <img src="./play-previous.svg" alt="Voltar" />
-                  </button>
-                
+            <img src="./play-previous.svg" alt="Voltar" onClick={playPrevious}/>
+          </button>
+
           <button
             type="button"
             className={styles.playButton}
-                      disabled={!episode}
-                      onClick={togglePlay}
-            >
-            {isPlaying ?
-             <img src="./pause.svg" alt="Pause" /> :
-             <img src="play.svg" alt="Tocar"/> 
-                  }
-           
+            disabled={!episode}
+            onClick={togglePlay}
+          >
+            {isPlaying ? (
+              <img src="./pause.svg" alt="Pause" />
+            ) : (
+              <img src="play.svg" alt="Tocar" />
+            )}
           </button>
-          <button type="button" disabled={!episode}>
+          <button type="button" disabled={!episode} onClick={playNext}>
             <img src="./play-next.svg" alt="Próxima" />
           </button>
           <button type="button" disabled={!episode}>
