@@ -2,16 +2,15 @@ import { GetStaticProps } from "next";
 import styles from "./home.module.scss";//styles
 
 import Image from "next/image";//image
-
+import Head from "next/head"
 import { api } from "../services/api";//Api
 import Link from 'next/link';
-import { useContext } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
 
 //Formatação datas e horas
 import { format, parseISO } from "date-fns";
 import ptBr from "date-fns/locale/pt-BR";
 import { converDurationToTime } from "../utils/convertDurationToTimeString";
+import { usePlayer } from "../components/Player";
 
 
 //Typagem das props
@@ -33,7 +32,7 @@ type HomeProps = {
 
 export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
 
-  const { playList } = useContext(PlayerContext);
+  const { playList } = usePlayer();
   const episodeList = [...latestEpisodes, ...allEpisodes];
   
   
@@ -41,6 +40,10 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
  
   return (
     <div className={styles.homepage}>
+
+      <Head>
+        <title>Podcastr</title>
+      </Head>
       <section className={styles.latestEpisodes}>
         <h2> Últimos lançamentos </h2>
 
