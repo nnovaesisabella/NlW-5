@@ -26,10 +26,10 @@ A aplicação consiste em selecionar os podcasts para serem ouvidos e sempre man
 
 Projeto foi desenvolvido com as seguintes tecnologias: 
 
-React .js
-Typescript 
-Sass
-Next .js
+-  React .js
+-  Typescript 
+-  Sass
+-  Next .js
 
 🎨 Styles:
 
